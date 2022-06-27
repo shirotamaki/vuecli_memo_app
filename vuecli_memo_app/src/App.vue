@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <HeaderTitle :headerTitle="msg"/>
+    <MemoList :memoList="memos"/>
+    <MemoForm @add="addMemo"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HeaderTitle from "./components/HeaderTitle.vue";
+import MemoList from "./components/MemoList.vue";
+import MemoForm from "./components/MemoForm.vue";
+// import EditDelete from "./components/EditDelete.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
+    HeaderTitle,
+    MemoList,
+    MemoForm,
+  },
+  data() {
+    return {
+      msg: 'メモアプリ',
+      text: '',
+      editIndex: -1,
+      memos: []
+    }
+  },
+  methods: {
+    addMemo(text) {
+      this.memos.push(text)
+    }
+  },
+  // mounted () {
+  //   this.memos = JSON.parse(localStorage.getItem('memos')) || []
+  // },
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
