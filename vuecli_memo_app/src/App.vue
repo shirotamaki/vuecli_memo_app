@@ -1,25 +1,21 @@
 <template>
   <div id="app">
     <HeaderTitle :headerTitle="msg"/>
-    <MemoList :memoList="memos"/>
-    <MemoForm @add="addMemo"/>
+    <MemoList :memoList="memos" @add="addMemo" @delete="deleteMemo"/>
   </div>
 </template>
 
 <script>
 import HeaderTitle from "./components/HeaderTitle.vue";
 import MemoList from "./components/MemoList.vue";
-import MemoForm from "./components/MemoForm.vue";
-// import EditDelete from "./components/EditDelete.vue";
 
 export default {
   name: "App",
   components: {
     HeaderTitle,
     MemoList,
-    MemoForm,
   },
-  data() {
+  data () {
     return {
       msg: 'メモアプリ',
       text: '',
@@ -27,14 +23,27 @@ export default {
       memos: []
     }
   },
-  methods: {
-    addMemo(text) {
-      this.memos.push(text)
-    }
+  mounted () {
+    // JSON.parse() は、JSON 文字列を取得し、JavaScriptオブジェクトに変換するこ
+    this.memos = JSON.parse(localStorage.getItem('memos')) || []
   },
-  // mounted () {
-  //   this.memos = JSON.parse(localStorage.getItem('memos')) || []
-  // },
+  methods: {
+    addMemo (text, index) {
+      if (index === -1) {
+        this.memos.push(text)
+      } else {
+        this.memos.splice(index, 1, text)
+      }
+      localStorage.setItem('memos', JSON.stringify(this.memos))
+    },
+    deleteMemo (index) {
+      if (confirm('Are you sure?')) {
+        this.memos.splice(index, 1)
+      }
+      this.text = ''
+      localStorage.setItem('memos', JSON.stringify(this.memos))
+    },
+  }
 }
 </script>
 
