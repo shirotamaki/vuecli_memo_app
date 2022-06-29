@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import HeaderTitle from "./components/HeaderTitle.vue";
-import MemoList from "./components/MemoList.vue";
+import HeaderTitle from './components/HeaderTitle.vue'
+import MemoList from './components/MemoList.vue'
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     HeaderTitle,
     MemoList,
@@ -20,7 +20,7 @@ export default {
       msg: 'メモアプリ',
       text: '',
       editIndex: -1,
-      memos: []
+      memos: [],
     }
   },
   mounted () {
@@ -42,7 +42,7 @@ export default {
       this.text = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
     },
-  }
+  },
 }
 </script>
 
