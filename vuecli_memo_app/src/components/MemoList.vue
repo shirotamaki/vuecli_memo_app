@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(memo, index) in memoList" :key="index">
+      <li v-for="(memo, index) in memoList" :key="index" class="memo-text">
         <span @click="edit(index, memo)">{{ displayTitle(memo) }}</span>
       </li>
     </ul>
@@ -12,7 +12,7 @@
 export default {
   props: ['memoList'],
 
-  data () {
+  data () {o
     return {
       text: '',
       editIndex: -1,
@@ -34,4 +34,9 @@ export default {
 </script>
 
 <style>
+
+.memo-text:hover {
+  color: blue;
+  text-decoration: underline;
+}
 </style>
