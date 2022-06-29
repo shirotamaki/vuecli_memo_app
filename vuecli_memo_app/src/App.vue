@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <HeaderTitle :headerTitle="msg"/>
-    <MemoList :memoList="memos" @edit="editMemoTrigger"/>
-    <MemoForm @add="addMemo" @delete="deleteMemo" ref="MemoForm"/>
+    <div class="container">
+      <HeaderTitle :headerTitle="msg"/>
+      <MemoList :memoList="memos" @edit="editMemoTrigger"/>
+      <MemoForm @add="addMemo" @delete="deleteMemo" ref="MemoForm"/>
+    </div>
   </div>
 </template>
 
@@ -54,4 +56,12 @@ export default {
 </script>
 
 <style>
+.container {
+  width: 240px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: yellow;
+  margin: 8px;
+  padding: 12px;
+}
 </style>

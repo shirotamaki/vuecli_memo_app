@@ -1,14 +1,14 @@
 <template>
-  <form @submit.prevent>
-    <span><button class="button" @click="displayForm" type="submit">+</button></span>
-    <div class="container-form" v-if="inputMode">
-      <textarea class="textarea" type="text" v-model="text" ref="editor" required></textarea>
-      <div class="form-button">
-        <span><button class="button" @click="addMemo" type="submit">編集</button></span>
-        <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
+    <form @submit.prevent>
+      <span><button class="button" @click="displayForm" type="submit">+</button></span>
+      <div class="container-form" v-if="inputMode">
+        <textarea class="textarea" type="text" v-model="text" ref="editor" required></textarea>
+        <div class="form-button">
+          <span><button class="button" @click="addMemo" type="submit">編集</button></span>
+          <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
 </template>
 
 <script>
@@ -58,7 +58,7 @@ export default {
 <style>
 .container-form {
   width: 200px;
-
+  margin:0 auto;
 }
 
 .textarea {
