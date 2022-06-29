@@ -11,13 +11,13 @@
       <textarea type="text" v-model="text" ref="editor"></textarea>
       <div>
         <span><button class="button" @click="setText" type="submit">{{ '＋' }}</button></span>
-        <span><button class="button" @click="cancel" type="submit">キャンセル</button></span>
+<!--        <span><button class="button" @click="cancel" type="submit">キャンセル</button></span>-->
+<!--        <span><button class="button" @click="cancel" type="submit">キャンセル</button></span>-->
         <span><button class="button" @click="remove" type="submit">削除</button></span>
       </div>
     </form>
   </div>
 </template>
-
 <script>
 export default {
   props: ['memoList'],
@@ -48,6 +48,7 @@ export default {
     },
     remove () {
       this.$emit('delete', this.editIndex)
+      this.cancel ()
     },
   },
 }

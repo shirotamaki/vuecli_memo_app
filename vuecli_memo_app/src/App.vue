@@ -24,7 +24,6 @@ export default {
     }
   },
   mounted () {
-    // JSON.parse() は、JSON 文字列を取得し、JavaScriptオブジェクトに変換するこ
     this.memos = JSON.parse(localStorage.getItem('memos')) || []
   },
   methods: {
