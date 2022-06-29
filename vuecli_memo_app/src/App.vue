@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <HeaderTitle :headerTitle="msg"/>
-    <MemoList :memoList="memos" @add="addMemo" @delete="deleteMemo"/>
+    <MemoList :memoList="memos" @edit="editMemoTrigger"/>
+    <MemoForm @add="addMemo" @delete="deleteMemo" ref="MemoForm"/>
   </div>
 </template>
 
 <script>
 import HeaderTitle from './components/HeaderTitle.vue'
+import MemoForm from './components/MemoForm.vue'
 import MemoList from './components/MemoList.vue'
 
 export default {
@@ -14,6 +16,7 @@ export default {
   components: {
     HeaderTitle,
     MemoList,
+    MemoForm,
   },
   data () {
     return {
@@ -36,11 +39,14 @@ export default {
       localStorage.setItem('memos', JSON.stringify(this.memos))
     },
     deleteMemo (index) {
-      if (confirm('Are you sure?')) {
+      // if (confirm('Are you sure?')) {
         this.memos.splice(index, 1)
-      }
+      // }
       this.text = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
+    },
+    editMemoTrigger (index, memo) {
+      this.$refs.MemoForm.editMemo(index, memo)
     },
   },
 }
