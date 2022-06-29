@@ -1,18 +1,15 @@
 <template>
   <form @submit.prevent>
     <span><button class="button" @click="displayForm" type="submit">+</button></span>
-
     <div class="container-form" v-if="inputMode">
       <textarea class="textarea" type="text" v-model="text" ref="editor" required></textarea>
-
-      <div class="form_button">
+      <div class="form-button">
         <span><button class="button" @click="addMemo" type="submit">編集</button></span>
         <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
       </div>
     </div>
   </form>
 </template>
-
 
 <script>
 
@@ -32,7 +29,7 @@ export default {
     displayTitle (memo) {
       return memo.split(/\n/)[0]
     },
-    displayForm() {
+    displayForm () {
       this.inputMode = true
     },
     editMemo (index, memo) {
@@ -63,12 +60,13 @@ export default {
   width: 200px;
 
 }
+
 .textarea {
   width: 200px;
   height: 200px;
 }
 
-.form_button {
+.form-button {
   text-align: right;
 }
 
@@ -76,4 +74,3 @@ export default {
   margin: 8px 0px 8px 8px;
 }
 </style>
-

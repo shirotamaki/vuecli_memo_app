@@ -12,14 +12,14 @@
 export default {
   props: ['memoList'],
 
-  data () {o
+  data () {
     return {
       text: '',
       editIndex: -1,
       memos: [],
-      inputMode: false,
     }
   },
+
   methods: {
     displayTitle (memo) {
       return memo.split(/\n/)[0]
@@ -34,7 +34,6 @@ export default {
 </script>
 
 <style>
-
 .memo-text:hover {
   color: blue;
   text-decoration: underline;

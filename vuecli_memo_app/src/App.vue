@@ -18,6 +18,7 @@ export default {
     MemoList,
     MemoForm,
   },
+
   data () {
     return {
       msg: 'メモアプリ',
@@ -26,9 +27,11 @@ export default {
       memos: [],
     }
   },
+
   mounted () {
     this.memos = JSON.parse(localStorage.getItem('memos')) || []
   },
+
   methods: {
     addMemo (text, index) {
       if (index === -1) {
@@ -39,9 +42,7 @@ export default {
       localStorage.setItem('memos', JSON.stringify(this.memos))
     },
     deleteMemo (index) {
-      // if (confirm('Are you sure?')) {
-        this.memos.splice(index, 1)
-      // }
+      this.memos.splice(index, 1)
       this.text = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
     },
