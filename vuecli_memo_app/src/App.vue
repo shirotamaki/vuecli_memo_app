@@ -1,29 +1,34 @@
 <template>
   <div id="app">
     <div class="container">
-      <HeaderTitle :headerTitle="msg"/>
-      <MemoList :memoList="memos" @edit="editMemoTrigger"/>
-      <MemoForm @add="addMemo" @delete="deleteMemo" ref="MemoForm"/>
+      <h1>メモアプリ</h1>
+      <MemoList
+          :memoList="memos"
+          @edit="editMemo"
+      />
+      <MemoForm
+          @add="addMemo"
+          @delete="deleteMemo"
+          :editMemoIndex="editIndex"
+          :editText="text"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import HeaderTitle from './components/HeaderTitle.vue'
 import MemoForm from './components/MemoForm.vue'
 import MemoList from './components/MemoList.vue'
 
 export default {
   name: 'App',
   components: {
-    HeaderTitle,
     MemoList,
     MemoForm,
   },
 
   data () {
     return {
-      msg: 'メモアプリ',
       text: '',
       editIndex: -1,
       memos: [],
@@ -48,8 +53,9 @@ export default {
       this.text = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
     },
-    editMemoTrigger (index, memo) {
-      this.$refs.MemoForm.editMemo(index, memo)
+    editMemo (index, memo) {
+      this.editIndex = index
+      this.text = memo
     },
   },
 }

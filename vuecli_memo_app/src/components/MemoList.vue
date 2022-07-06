@@ -10,7 +10,9 @@
 
 <script>
 export default {
-  props: ['memoList'],
+  props: {
+    memoList: String,
+  },
 
   data () {
     return {

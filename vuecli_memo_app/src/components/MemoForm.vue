@@ -1,8 +1,8 @@
 <template>
     <form @submit.prevent>
-      <span><button class="button" @click="displayForm" type="submit">+</button></span>
-      <div class="container-form" v-if="inputMode">
-        <textarea class="textarea" type="text" v-model="text" ref="editor" required></textarea>
+      <span><button class="button" @click="addForm" type="submit">+</button></span>
+      <div class="container-form" v-if="enable">
+        <textarea v-model="text" class="textarea" type="text" required></textarea>
         <div class="form-button">
           <span><button class="button" @click="addMemo" type="submit">編集</button></span>
           <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
@@ -14,29 +14,23 @@
 <script>
 
 export default {
-  props: ['memoList'],
+  props: {
+    editMemoIndex: Number,
+    editText: String,
+  },
 
   data () {
     return {
       text: '',
       editIndex: -1,
       memos: [],
-      inputMode: false,
+      enable: false,
     }
   },
 
   methods: {
-    displayTitle (memo) {
-      return memo.split(/\n/)[0]
-    },
-    displayForm () {
-      this.inputMode = true
-    },
-    editMemo (index, memo) {
-      this.inputMode = true
-      this.editIndex = index
-      this.text = memo
-      this.$refs.editor.focus()
+    addForm () {
+      this.enable = true
     },
     addMemo () {
       this.$emit('add', this.text, this.editIndex)
@@ -45,13 +39,23 @@ export default {
     cancel () {
       this.text = ''
       this.editIndex = -1
-      this.inputMode = false
+      this.enable = false
     },
     deleteMemo () {
       this.$emit('delete', this.editIndex)
       this.cancel()
     },
   },
+
+  watch: {
+    editMemoIndex: function(editMemoIndex) {
+      this.editIndex = editMemoIndex
+    },
+    editText: function(editText) {
+      this.text = editText
+      this.enable = true
+    }
+  }
 }
 </script>
 
