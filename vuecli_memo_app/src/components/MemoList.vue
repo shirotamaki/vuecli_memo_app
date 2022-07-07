@@ -11,15 +11,7 @@
 <script>
 export default {
   props: {
-    memoList: String,
-  },
-
-  data () {
-    return {
-      text: '',
-      editIndex: -1,
-      memos: [],
-    }
+    memoList: Array,
   },
 
   methods: {
@@ -27,9 +19,7 @@ export default {
       return memo.split(/\n/)[0]
     },
     edit (index, memo) {
-      this.editIndex = index
-      this.text = memo
-      this.$emit('edit', this.editIndex, this.text)
+      this.$emit('edit', index, memo)
     },
   },
 }

@@ -7,10 +7,10 @@
           @edit="editMemo"
       />
       <MemoForm
+          :editMemoIndex="editIndex"
+          :editMemoText="text"
           @add="addMemo"
           @delete="deleteMemo"
-          :editMemoIndex="editIndex"
-          :editText="text"
       />
     </div>
   </div>
@@ -29,8 +29,8 @@ export default {
 
   data () {
     return {
-      text: '',
       editIndex: -1,
+      text: '',
       memos: [],
     }
   },

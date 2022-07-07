@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent>
       <span><button class="button" @click="addForm" type="submit">+</button></span>
-      <div class="container-form" v-if="enable">
+      <div class="container-form" v-if="isFormEnabled">
         <textarea v-model="text" class="textarea" type="text" required></textarea>
         <div class="form-button">
           <span><button class="button" @click="addMemo" type="submit">編集</button></span>
@@ -16,21 +16,20 @@
 export default {
   props: {
     editMemoIndex: Number,
-    editText: String,
+    editMemoText: String,
   },
 
   data () {
     return {
       text: '',
       editIndex: -1,
-      memos: [],
-      enable: false,
+      isFormEnabled: false,
     }
   },
 
   methods: {
     addForm () {
-      this.enable = true
+      this.isFormEnabled = true
     },
     addMemo () {
       this.$emit('add', this.text, this.editIndex)
@@ -39,7 +38,7 @@ export default {
     cancel () {
       this.text = ''
       this.editIndex = -1
-      this.enable = false
+      this.isFormEnabled = false
     },
     deleteMemo () {
       this.$emit('delete', this.editIndex)
@@ -51,9 +50,9 @@ export default {
     editMemoIndex: function(editMemoIndex) {
       this.editIndex = editMemoIndex
     },
-    editText: function(editText) {
-      this.text = editText
-      this.enable = true
+    editMemoText: function(editMemoText) {
+      this.text = editMemoText
+      this.isFormEnabled = true
     }
   }
 }
