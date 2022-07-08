@@ -9,7 +9,8 @@
       <MemoForm
           :editMemoIndex="editIndex"
           :editMemoText="text"
-          @add="addMemo"
+          @create="createMemo"
+          @update="updateMemo"
           @delete="deleteMemo"
       />
     </div>
@@ -40,12 +41,12 @@ export default {
   },
 
   methods: {
-    addMemo (text, index) {
-      if (index === -1) {
-        this.memos.push(text)
-      } else {
-        this.memos.splice(index, 1, text)
-      }
+    createMemo (text) {
+      this.memos.push(text)
+      localStorage.setItem('memos', JSON.stringify(this.memos))
+    },
+    updateMemo (text, index) {
+      this.memos.splice(index, 1, text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
     },
     deleteMemo (index) {
