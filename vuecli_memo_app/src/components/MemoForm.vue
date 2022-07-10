@@ -1,13 +1,15 @@
 <template>
   <form @submit.prevent>
     <span><button class="button" @click="addForm" type="submit">+</button></span>
-    <div class="container-form" v-if="isFormEnabled">
+    <div class="container-form" v-if="isEditing || isFormEnabled">
         <textarea :value="editMemoText" @input="newText = $event.target.value" class="textarea" required>
         </textarea>
       <div class="form-button">
-        <span v-if="isEditing"><button class="button" @click="updateMemo" type="submit">編集</button></span>
+        <template v-if="isEditing">
+          <span><button class="button" @click="updateMemo" type="submit">編集</button></span>
+          <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
+        </template>
         <span v-else><button class="button" @click="createMemo" type="submit">追加</button></span>
-        <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
       </div>
     </div>
   </form>
@@ -36,22 +38,15 @@ export default {
     },
     createMemo () {
       this.$emit('create', this.newText)
-      this.cancel()
+      this.isFormEnabled = false
     },
     updateMemo () {
       this.$emit('update', this.newText, this.editMemoIndex)
-      this.cancel()
-    },
-    cancel () {
       this.isFormEnabled = false
     },
     deleteMemo () {
       this.$emit('delete', this.editMemoIndex)
-      this.cancel()
-    },
-    inputEditText (value) {
-      this.newText = value
-      console.log(this.newText)
+      this.isFormEnabled = false
     },
   },
 }

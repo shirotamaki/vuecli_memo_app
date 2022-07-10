@@ -50,11 +50,13 @@ export default {
       this.memos.splice(index, 1, text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.text = ''
+      this.editIndex = -1
     },
     deleteMemo (index) {
       this.memos.splice(index, 1)
-      this.text = ''
       localStorage.setItem('memos', JSON.stringify(this.memos))
+      this.text = ''
+      this.editIndex = -1
     },
     editMemo (index, memo) {
       this.editIndex = index
