@@ -44,10 +44,12 @@ export default {
     createMemo (text) {
       this.memos.push(text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
+      this.text = ''
     },
     updateMemo (text, index) {
       this.memos.splice(index, 1, text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
+      this.text = ''
     },
     deleteMemo (index) {
       this.memos.splice(index, 1)

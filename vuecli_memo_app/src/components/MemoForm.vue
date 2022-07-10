@@ -1,60 +1,59 @@
 <template>
-    <form @submit.prevent>
-      <span><button class="button" @click="addForm" type="submit">+</button></span>
-      <div class="container-form" v-if="isFormEnabled">
-        <textarea v-model="text" class="textarea" type="text" required></textarea>
-        <div class="form-button">
-          <span><button class="button" @click="addMemo" type="submit">編集</button></span>
-          <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
-        </div>
+  <form @submit.prevent>
+    <span><button class="button" @click="addForm" type="submit">+</button></span>
+    <div class="container-form" v-if="isFormEnabled">
+        <textarea :value="editMemoText" @input="newText = $event.target.value" class="textarea" required>
+        </textarea>
+      <div class="form-button">
+        <span v-if="isEditing"><button class="button" @click="updateMemo" type="submit">編集</button></span>
+        <span v-else><button class="button" @click="createMemo" type="submit">追加</button></span>
+        <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
       </div>
-    </form>
+    </div>
+  </form>
 </template>
 
 <script>
-
 export default {
   props: {
     editMemoIndex: Number,
     editMemoText: String,
   },
-
   data () {
     return {
-      text: '',
-      editIndex: -1,
+      newText: '',
       isFormEnabled: false,
     }
   },
-
+  computed: {
+    isEditing () {
+      return this.editMemoIndex !== -1
+    },
+  },
   methods: {
     addForm () {
       this.isFormEnabled = true
     },
-    addMemo () {
-      this.$emit('add', this.text, this.editIndex)
+    createMemo () {
+      this.$emit('create', this.newText)
+      this.cancel()
+    },
+    updateMemo () {
+      this.$emit('update', this.newText, this.editMemoIndex)
       this.cancel()
     },
     cancel () {
-      this.text = ''
-      this.editIndex = -1
       this.isFormEnabled = false
     },
     deleteMemo () {
-      this.$emit('delete', this.editIndex)
+      this.$emit('delete', this.editMemoIndex)
       this.cancel()
     },
-  },
-
-  watch: {
-    editMemoIndex: function(editMemoIndex) {
-      this.editIndex = editMemoIndex
+    inputEditText (value) {
+      this.newText = value
+      console.log(this.newText)
     },
-    editMemoText: function(editMemoText) {
-      this.text = editMemoText
-      this.isFormEnabled = true
-    }
-  }
+  },
 }
 </script>
 
