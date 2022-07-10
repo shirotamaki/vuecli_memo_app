@@ -6,13 +6,18 @@
           :memoList="memos"
           @edit="editMemo"
       />
-      <MemoForm
-          :editMemoIndex="editIndex"
-          :editMemoText="text"
-          @create="createMemo"
-          @update="updateMemo"
-          @delete="deleteMemo"
+      <ButtonForm
+          @open="openForm"
       />
+      <template v-if="isOpening">
+        <MemoForm
+            :editMemoIndex="editIndex"
+            :editMemoText="text"
+            @create="createMemo"
+            @update="updateMemo"
+            @delete="deleteMemo"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -20,12 +25,14 @@
 <script>
 import MemoForm from './components/MemoForm.vue'
 import MemoList from './components/MemoList.vue'
+import ButtonForm from './components/ButtonForm.vue'
 
 export default {
   name: 'App',
   components: {
     MemoList,
     MemoForm,
+    ButtonForm,
   },
 
   data () {
@@ -33,6 +40,7 @@ export default {
       editIndex: -1,
       text: '',
       memos: [],
+      isFormEnabled: false,
     }
   },
 
@@ -40,28 +48,41 @@ export default {
     this.memos = JSON.parse(localStorage.getItem('memos')) || []
   },
 
+  computed: {
+    isOpening() {
+      return this.isFormEnabled
+    }
+  },
+
   methods: {
     createMemo (text) {
       this.memos.push(text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.text = ''
+      this.isFormEnabled = false
     },
     updateMemo (text, index) {
       this.memos.splice(index, 1, text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.text = ''
       this.editIndex = -1
+      this.isFormEnabled = false
     },
     deleteMemo (index) {
       this.memos.splice(index, 1)
       localStorage.setItem('memos', JSON.stringify(this.memos))
       this.text = ''
       this.editIndex = -1
+      this.isFormEnabled = false
     },
     editMemo (index, memo) {
       this.editIndex = index
       this.text = memo
+      this.isFormEnabled = true
     },
+    openForm() {
+      this.isFormEnabled = true
+    }
   },
 }
 </script>

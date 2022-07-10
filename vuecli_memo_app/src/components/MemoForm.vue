@@ -1,9 +1,6 @@
 <template>
-  <form @submit.prevent>
-    <span><button class="button" @click="addForm" type="submit">+</button></span>
-    <div class="container-form" v-if="isEditing || isFormEnabled">
-        <textarea :value="editMemoText" @input="newText = $event.target.value" class="textarea" required>
-        </textarea>
+  <form @submit.prevent class="container-form">
+      <textarea :value="editMemoText" @input="newText = $event.target.value" class="textarea" required></textarea>
       <div class="form-button">
         <template v-if="isEditing">
           <span><button class="button" @click="updateMemo" type="submit">編集</button></span>
@@ -11,7 +8,6 @@
         </template>
         <span v-else><button class="button" @click="createMemo" type="submit">追加</button></span>
       </div>
-    </div>
   </form>
 </template>
 

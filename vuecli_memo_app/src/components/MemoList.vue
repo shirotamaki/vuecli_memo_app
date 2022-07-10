@@ -13,7 +13,6 @@ export default {
   props: {
     memoList: Array,
   },
-
   methods: {
     displayTitle (memo) {
       return memo.split(/\n/)[0]
