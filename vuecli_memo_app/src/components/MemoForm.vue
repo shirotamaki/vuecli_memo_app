@@ -33,24 +33,24 @@ export default {
   methods: {
     createMemo () {
       if (this.newText !== '') {
-      this.$emit('create', this.newText)
-      }else{
+        this.$emit('create', this.newText)
+      } else {
         this.cancel()
       }
     },
     updateMemo () {
       if (this.newText !== '') {
-      this.$emit('update', this.newText, this.editMemoIndex)
-      }else{
+        this.$emit('update', this.newText, this.editMemoIndex)
+      } else {
         this.cancel()
       }
     },
     deleteMemo () {
       this.$emit('delete', this.editMemoIndex)
     },
-    cancel() {
+    cancel () {
       this.$emit('cancel')
-    }
+    },
   },
 }
 </script>
