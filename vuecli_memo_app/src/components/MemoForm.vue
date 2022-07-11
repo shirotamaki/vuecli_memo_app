@@ -20,7 +20,6 @@ export default {
   data () {
     return {
       newText: '',
-      isFormEnabled: false,
     }
   },
   computed: {
@@ -29,20 +28,14 @@ export default {
     },
   },
   methods: {
-    addForm () {
-      this.isFormEnabled = true
-    },
     createMemo () {
       this.$emit('create', this.newText)
-      this.isFormEnabled = false
     },
     updateMemo () {
       this.$emit('update', this.newText, this.editMemoIndex)
-      this.isFormEnabled = false
     },
     deleteMemo () {
       this.$emit('delete', this.editMemoIndex)
-      this.isFormEnabled = false
     },
   },
 }

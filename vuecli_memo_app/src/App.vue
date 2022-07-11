@@ -9,7 +9,7 @@
       <ButtonForm
           @open="openForm"
       />
-      <template v-if="isOpening">
+      <template v-if="isDisplaying">
         <MemoForm
             :editMemoIndex="editIndex"
             :editMemoText="text"
@@ -34,7 +34,6 @@ export default {
     MemoForm,
     ButtonForm,
   },
-
   data () {
     return {
       editIndex: -1,
@@ -43,17 +42,14 @@ export default {
       isFormEnabled: false,
     }
   },
-
   mounted () {
     this.memos = JSON.parse(localStorage.getItem('memos')) || []
   },
-
   computed: {
-    isOpening() {
+    isDisplaying () {
       return this.isFormEnabled
     }
   },
-
   methods: {
     createMemo (text) {
       this.memos.push(text)
