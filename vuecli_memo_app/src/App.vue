@@ -16,6 +16,7 @@
             @create="createMemo"
             @update="updateMemo"
             @delete="deleteMemo"
+            @cancel="cancelMemo"
         />
       </template>
     </div>
@@ -54,7 +55,6 @@ export default {
     createMemo (text) {
       this.memos.push(text)
       localStorage.setItem('memos', JSON.stringify(this.memos))
-      this.text = ''
       this.isFormEnabled = false
     },
     updateMemo (text, index) {
@@ -75,6 +75,9 @@ export default {
       this.editIndex = index
       this.text = memo
       this.isFormEnabled = true
+    },
+    cancelMemo() {
+      this.isFormEnabled = false
     },
     openForm() {
       this.isFormEnabled = true

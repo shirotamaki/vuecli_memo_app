@@ -1,13 +1,16 @@
 <template>
   <form @submit.prevent class="container-form">
-      <textarea :value="editMemoText" @input="newText = $event.target.value" class="textarea" required></textarea>
-      <div class="form-button">
-        <template v-if="isEditing">
-          <span><button class="button" @click="updateMemo" type="submit">編集</button></span>
-          <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
-        </template>
-        <span v-else><button class="button" @click="createMemo" type="submit">追加</button></span>
-      </div>
+    <div class="form-button">
+      <template v-if="isEditing">
+        <textarea :value="editMemoText" @input="newText = $event.target.value" class="textarea"></textarea>
+        <span><button class="button" @click="updateMemo" type="submit">編集</button></span>
+        <span><button class="button" @click="deleteMemo" type="submit">削除</button></span>
+      </template>
+      <template v-else>
+        <textarea @input="newText = $event.target.value" class="textarea"></textarea>
+        <span><button class="button" @click="createMemo" type="submit">追加</button></span>
+      </template>
+    </div>
   </form>
 </template>
 
@@ -29,14 +32,25 @@ export default {
   },
   methods: {
     createMemo () {
+      if (this.newText !== '') {
       this.$emit('create', this.newText)
+      }else{
+        this.cancel()
+      }
     },
     updateMemo () {
+      if (this.newText !== '') {
       this.$emit('update', this.newText, this.editMemoIndex)
+      }else{
+        this.cancel()
+      }
     },
     deleteMemo () {
       this.$emit('delete', this.editMemoIndex)
     },
+    cancel() {
+      this.$emit('cancel')
+    }
   },
 }
 </script>
