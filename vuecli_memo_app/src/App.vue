@@ -6,7 +6,7 @@
           :memoList="memos"
           @edit="editMemo"
       />
-      <CreateMemoButtonForm
+      <CreateMemoButton
           @open="openForm"
       />
       <template v-if="isDisplaying">
@@ -26,14 +26,14 @@
 <script>
 import MemoForm from './components/MemoForm.vue'
 import MemoList from './components/MemoList.vue'
-import CreateMemoButtonForm from './components/CreateMemoButtonForm.vue'
+import CreateMemoButton from './components/CreateMemoButton.vue'
 
 export default {
   name: 'App',
   components: {
     MemoList,
     MemoForm,
-    CreateMemoButtonForm,
+    CreateMemoButton,
   },
   data () {
     return {

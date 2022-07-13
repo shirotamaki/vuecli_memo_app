@@ -1,7 +1,5 @@
 <template>
-  <form @submit.prevent>
-    <span><button class="button" @click="openForm" type="submit">+</button></span>
-  </form>
+    <span><button class="button" @click="openForm">+</button></span>
 </template>
 
 <script>
